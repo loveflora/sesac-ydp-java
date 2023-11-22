@@ -1,0 +1,230 @@
+package _03_array;
+
+import java.util.Arrays;
+
+// 표준 배열
+
+// 배열
+// - 배열에 저장할 자료형 선언 -> 배열 이름, 크기 선언
+// - 배열 원소는 모두 같은 타입
+// - 처음 선언한 배열 크기 변경 불가능
+
+
+public class ArrayEx {
+
+	public static void main(String[] args) {
+		// 배열 변수 선언 (2가지 방법)
+		
+		// 1. 타입[] 변수;  (관례적으로 많이 씀)
+//		int[] arr1;  
+		
+		// 2. 타입 변수[];
+		int arr2[];
+
+		// -  배열 변수 "참조". null 초기화 가능
+		// ex. 타입[] 변수 = null;
+		// => 배열 변수가 null 값을 가진 상태에서 indexing 한다면, NullPointerException !!
+		String[] temp = null;
+		System.out.println(temp);  // null
+		// System.out.println(temp[2]);  // Error ("temp" is null)
+		
+		int[] intArray = {16, 22, 34, 41, 59};
+		System.out.println("intArray[0] : " + intArray[0]);
+		System.out.println("intArray[1] : " + intArray[1]);
+		System.out.println("intArray[2] : " + intArray[2]);
+		System.out.println(intArray);  // [I@58644d46 참조값
+		
+		intArray[1] = 77; // index 1 원소 값을 변경
+		System.out.println("intArray[1] : " + intArray[1]);  // 77
+		
+		// 배열 변수 선언과 대입 시점이 다르다면, "new 타입[]"을 중괄호 앞에 붙여야 함
+	    char[] charArray;
+	   // charArray = {'A', 'B', 'C'};  //error
+	    charArray = new char[]{'A', 'B', 'C'};
+		System.out.println("charArray[0] : " + charArray[0]);
+		System.out.println("charArray[1] : " + charArray[1]);
+		System.out.println("charArray[2] : " + charArray[2]);
+		
+        // - new 연산자로 배열 선언 / 생성
+		// : 배열 원소 값은 기본 값을 초기화됨
+		double[] doubleArray = new double[3];
+		System.out.println("new 연산자로 초기화된 값 : " + doubleArray[0]);  // 0.0
+		
+		doubleArray[0] = 0.1;
+		doubleArray[1] = 1.2;
+		doubleArray[2] = 4.2;
+		
+		System.out.println("doubleArray[0]" + doubleArray[0]);
+		System.out.println("doubleArray[1]" + doubleArray[1]);
+		System.out.println("doubleArray[2]" + doubleArray[2]);
+	
+		///////////////////////////////////
+		// 배열 길이
+		// - 배열변수.length;
+		System.out.println("doubleArray 배열 길이 : " + doubleArray.length);
+		// doubleArray.length = 5;  // Error (length 필는 읽기 전용이라 수정 불가)
+		
+		// ex) 총합, 평균
+		int sum = 0;
+		for (int i = 0; i < intArray.length; i++) {
+			sum += intArray[i];
+		}
+		
+		System.out.println("총합 : " + sum);
+		
+		double avg = (double) sum / intArray.length;
+		System.out.println("평균 : " + avg);
+		
+		// System.out.println(doubleArray[doubleArray.length]);  // error (ArrayIndexOutOfBoundsException)
+		
+		////////////////////////////////////////
+		// 배열 출력 Arrays (utils)
+		// - toString(): 배열 내용을 문자열로 변환해서 출력
+		// - 배열 주소 (참조) 값이 아니라, 배열 내부의 값을 보고 싶을 때 !
+		System.out.println("intArray : " + Arrays.toString(intArray));
+		System.out.println("charArray : " + Arrays.toString(charArray));
+		System.out.println("doubleArray : " + Arrays.toString(doubleArray));
+		
+		/////////////////////////////////////////
+		// 다차원 배열
+		// - 배열 안에 또 다른 배열이 존재하는 배열
+		
+		// 2*3 배열 생성, 초기화
+		int[][] matrix = {{1, 2, 3}, {4, 5, 6}};
+		
+		System.out.println("matrix : ");
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		// 3*2 배열 생성, 초기화
+		int[][] matrix2 = new int[3][2];
+		matrix2[0][0] = 1;
+		matrix2[0][1] = 2;
+		matrix2[1][0] = 3;
+		matrix2[1][1] = 4;
+		matrix2[2][0] = 5;
+		matrix2[2][1] = 6;
+		
+		System.out.println("\nmatrix2 : ");
+		for (int i = 0; i < matrix2.length; i++) {
+			for (int j = 0; j < matrix2[i].length; j++) {
+				System.out.print(matrix2[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+		// 3차원 배열 생성, 초기화
+		int[][][] threeArray = { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+		
+		System.out.println("\nthreeArray : ");
+		for (int i = 0; i < threeArray.length; i++) {
+			for (int j = 0; j < threeArray[i].length; j++) {
+				for (int k = 0; k < threeArray[i][j].length; k++) {
+				System.out.print(threeArray[i][j][k] + " ");
+			}
+			System.out.println();
+		}
+			System.out.println();
+		}
+		
+		/////////////////////////////////////
+		// 객체를 참조하는 배열
+		// - 기본 타입 배열 각 원소에 "값"이 저장
+		// - 참조 타입 배열 각 원소에 "참조(주소)"가 저장
+		String[] langs = new String[3];
+		langs[0] = "Java";
+		langs[1] = "Java";
+		langs[2] = new String("Java");
+		
+		// langs[0] , langs[1] : 문자열 리터럴을 저장. 
+		// 문자열 리터럴의 경우에는 Java 컴파일러가 문자열 풀(string pool) 공유된 영역에 저장
+		
+		// langs[2] : new 연산자로 문자열 객체를 생성 (참조값도 새로 받음) 
+		System.out.println(langs[0] == langs[1]);  // true (같은 객체를 참조)
+		System.out.println(langs[1] == langs[2]);  // false
+		System.out.println(langs[0].equals(langs[2]));  // true
+		
+		///////////////////////////////////////
+		// 배열 관련 메소드
+		// 배열 복사
+		// - 표준 배열은 크기가 고정 -> 더 많은 저장공간이 필요하다면, 더 큰 길이의 배열을 새로 만들어 기존 배열 복사
+		
+		// ver 1. 반복문 요소를 하나씩 복사
+		int[] originArray = { 1, 2, 3 };
+		int[] newArray = new int[5];
+		System.out.println("originArray : " + Arrays.toString(originArray));  // 기존 배열 출력
+		
+		for(int i = 0; i < originArray.length; i++) {
+			newArray[i] = originArray[i];
+		}
+		
+		System.out.println("newArray : " + Arrays.toString(newArray));  // 복사된 배열 출력
+		
+		
+		// ver 2. arraycopy() 메소드
+		// arraycopy(Object src, int srcPos, Object dest, int destPos, int length);
+		// - Object src : 원본 배열
+		// - int srcPos : 원본 배열 복사 시작 인덱스
+		// - Object dest : 새로운 배열
+		// - int destPos : 새로운 배열 붙여넣기 시작 인덱스
+		// - int length : 복사할 원소 개수
+		
+		String[] originFruits = {"apple", "banana", "kiwi"};
+		String[] newFruits = new String[5];
+		
+		System.arraycopy(originFruits, 1, newFruits, 0, originFruits.length - 1);
+		System.out.println("originFruits : " + Arrays.toString(originFruits));
+		System.out.println("newFruits : " + Arrays.toString(newFruits));  // [banana, kiwi, null, null, null]
+		// destPo : 0 ---> [apple, banana, kiwi, null, null]
+		// destPo : 1 ---> [null, apple, banana, kiwi, null]
+		
+		
+		// Arrays 메소드
+		int[] originArr = { 1, 2, 3, 4, 5};
+		int[] copiedArr = Arrays.copyOf(originArr, 3);
+		System.out.println("copiedArr : " + Arrays.toString(copiedArr));  // [1, 2, 3]
+		
+		// copyOfRange(arr, sIdx, eIdx)
+		int[] rangeArr = Arrays.copyOfRange(originArr, 1, 4);
+		System.out.println("rangeArr : " + Arrays.toString(rangeArr));  // [2, 3, 4]
+		
+		// fill(arr, n)
+		int[] filledArr = new int[5];
+		Arrays.fill(filledArr, 7);
+		System.out.println("filledArr : " + Arrays.toString(filledArr));  // [7, 7, 7, 7, 7]
+		
+		// sort()
+		int[] unsortedArr = { 8, 2, 6, 9, 1};
+		Arrays.sort(unsortedArr);
+		System.out.println("unsortedArr : " + Arrays.toString(unsortedArr));  // [1, 2, 6, 8, 9]
+		
+		// equals(arr1, arr2)
+		int[] array1 = {1, 2, 3};
+		int[] array2 = {1, 2, 3};
+		int[] array3 = {4, 2, 3};
+	
+		System.out.println("array1 vs. array2 : " + Arrays.equals(array1, array2));  // true
+		System.out.println("array1 vs. array3 : " + Arrays.equals(array1, array3));  // false
+		
+		System.out.println("array1 == array2 : " + (array1 == array2));  // false
+		System.out.println("array1 == array3 : " + (array1 == array3));  // false
+		
+		int[][] deepArray1 = {{1, 2}, {3, 4}};
+		int[][] deepArray2 = {{1, 2}, {3, 4}};
+		int[][] deepArray3 = {{1, 2}, {3, 5}};
+	
+		System.out.println("deepArray1 vs. deepArray2 : " + Arrays.deepEquals(deepArray1, deepArray2));  // true
+		System.out.println("deepArray1 vs. deepArray3 : " + Arrays.deepEquals(deepArray1, deepArray3));  // false
+		
+		// binarySearch(arr, val) : 단, 배열이 정렬된 상태여야 함.
+		int[] sortedArray = {10, 20, 30, 60, 90};
+		int idx = Arrays.binarySearch(sortedArray, 60);
+		System.out.println("Index of 60 : " + idx);  // 3
+		
+		
+	}
+}
