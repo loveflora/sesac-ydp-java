@@ -62,7 +62,8 @@ public class Rectangle {
 	            System.out.println("넓이: " + rectangle1.getArea());
 	            System.out.println("-------------------------");
 	        }
-	
+	        
+	        System.out.println("Rectangle 인스턴스의 개수는: " + rectangleList.size());
 	
 	}
 }
