@@ -21,7 +21,7 @@ public class Vehicle {
 	
 	public void displayInfo() {
         System.out.println("===== Bus 정보 =====");
-        System.out.println("종 : " + getSpecies());
+      
 
         System.out.println();
        
